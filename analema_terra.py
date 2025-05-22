@@ -47,7 +47,6 @@ for d in dies:
 plt.style.use('classic')
 plt.figure(facecolor='white', figsize=(6,8))
 plt.scatter(azimuts, altures, s=50, edgecolors='none')
-plt.title('Analema solar vist desde Bellaterra a les 12:00')
 plt.xlabel('Azimut (°)')
 plt.ylabel('Altura (°)')
 plt.grid(True)
@@ -75,7 +74,7 @@ altures_ = []
 
 
 # Llegir l'arxiu exportat de Stellarium
-with open('analema_12h.csv', newline='', encoding='utf-8') as f:
+with open('dades_stellarium/analema_12h.csv', newline='', encoding='utf-8') as f:
     lector = csv.DictReader(f, delimiter=';')
     for fila in lector:
         azimut_deg = float(fila['Azimuts'])
@@ -124,7 +123,6 @@ for d in dies:
 plt.style.use('classic')
 plt.figure(facecolor='white', figsize=(6,8))
 plt.scatter(azimuts_1, altures_1, s=50, edgecolors='none')
-plt.title('Analema solar vist desde Bellaterra a les 9:00')
 plt.xlabel('Azimut (°)')
 plt.ylabel('Altura (°)')
 plt.grid(True)
@@ -152,7 +150,7 @@ altures_ = []
 
 
 # Llegir l'arxiu exportat de Stellarium
-with open('analema_9h.csv', newline='', encoding='utf-8') as f:
+with open('dades_stellarium/analema_9h.csv', newline='', encoding='utf-8') as f:
     lector = csv.DictReader(f, delimiter=';')
     print(lector.fieldnames)
     for fila in lector:
@@ -199,7 +197,6 @@ for d in dies:
 plt.style.use('classic')
 plt.figure(facecolor='white', figsize=(6,8))
 plt.scatter(azimuts_2, altures_2, s=50, edgecolors='none')
-plt.title('Analema solar vist desde Bellaterra a les 15:00')
 plt.xlabel('Azimut (°)')
 plt.ylabel('Altura (°)')
 plt.grid(True)
@@ -227,7 +224,7 @@ altures_ = []
 
 
 # Llegir l'arxiu exportat de Stellarium
-with open('analema_9h.csv', newline='', encoding='utf-8') as f:
+with open('dades_stellarium/analema_15h.csv', newline='', encoding='utf-8') as f:
     lector = csv.DictReader(f, delimiter=';')
     print(lector.fieldnames)
     for fila in lector:
