@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import csv
 
 # Latitud de Bellaterra
 lat= np.radians(41.5037)
@@ -19,8 +20,10 @@ def declinacion(d):
     return np.radians(-23.44 * np.cos(2 * np.pi * (d + 10) / 365.25))
 
 # Listas para guardar altura y azimut
-altituts = []
+altures = []
 azimuts = []
+
+
 
 for d in dies:
     delta = declinacion(d)         # declinació en radiants
@@ -29,7 +32,7 @@ for d in dies:
 
     # Altura solar
     h = np.arcsin(np.sin(lat) * np.sin(delta) + np.cos(lat) * np.cos(delta) * np.cos(H))
-    altituts.append(np.degrees(h))
+    altures.append(np.degrees(h))
 
     # Azimut solar
     if H > 0:
@@ -43,21 +46,62 @@ for d in dies:
 # Gràfica
 plt.style.use('classic')
 plt.figure(facecolor='white', figsize=(6,8))
-plt.scatter(azimuts, altituts, s=100, edgecolors='none')
+plt.scatter(azimuts, altures, s=50, edgecolors='none')
 plt.title('Analema solar vist desde Bellaterra a les 12:00')
 plt.xlabel('Azimut (°)')
 plt.ylabel('Altura (°)')
 plt.grid(True)
-plt.gca().invert_xaxis()   # Canviem l'orientació el gràfic per a què l'oest es trobi a la dreta.
+plt.gca().invert_xaxis()   # Canviem l'orientació horitzontal del gràfic per a què l'oest es trobi a la dreta.
 plt.tight_layout()
 plt.show()
+
+
+#Càlcul de les mesures angulars de l'analema obtingut
+
+altura_max = max(altures)
+altura_min = min(altures)
+
+
+azimut_max = max(azimuts)
+azimut_min = min(azimuts)
+
+
+
+
+#Càlcul de les mesures angulars de l'analema obtingut amb Stellarium
+
+azimuts_ = []
+altures_ = []
+
+
+# Llegir l'arxiu exportat de Stellarium
+with open('analema_12h.csv', newline='', encoding='utf-8') as f:
+    lector = csv.DictReader(f, delimiter=';')
+    for fila in lector:
+        azimut_deg = float(fila['Azimuts'])
+        altura_deg = float(fila['Altures'])
+        azimuts_.append(azimut_deg)
+        altures_.append(altura_deg)
+        
+
+#Imprimir valors per comparar mides
+
+print('ANALEMA 12H')
+
+print('Mida altitudinal analema: ', altura_max - altura_min, 'graus')
+print('Mida altitudinal analema Stellarium: ', max(altures_) - min(altures_), 'graus')
+
+print('Mida azimutal analema: ', azimut_max - azimut_min, 'graus')
+print('Mida azimutal analema Stellarium: ', max(azimuts_) - min(azimuts_), 'graus')
+
+
 
 
 
 
 #Analema Solar a les 9:00h
 
-altituts_1 = []
+altures_1 = []
 azimuts_1 = []
 
 for d in dies:
@@ -67,7 +111,7 @@ for d in dies:
 
     # Altura solar
     h = np.arcsin(np.sin(lat) * np.sin(delta) + np.cos(lat) * np.cos(delta) * np.cos(H))
-    altituts_1.append(np.degrees(h))
+    altures_1.append(np.degrees(h))
 
     # Azimut solar
     if H > 0:
@@ -79,7 +123,7 @@ for d in dies:
     
 plt.style.use('classic')
 plt.figure(facecolor='white', figsize=(6,8))
-plt.scatter(azimuts_1, altituts_1, s=100, edgecolors='none')
+plt.scatter(azimuts_1, altures_1, s=50, edgecolors='none')
 plt.title('Analema solar vist desde Bellaterra a les 9:00')
 plt.xlabel('Azimut (°)')
 plt.ylabel('Altura (°)')
@@ -89,9 +133,49 @@ plt.tight_layout()
 plt.show()
 
 
+#Càlcul de les mesures angulars de l'analema obtingut
+
+altura_max = max(altures_1)
+altura_min = min(altures_1)
+
+
+azimut_max = max(azimuts_1)
+azimut_min = min(azimuts_1)
+
+
+
+
+#Càlcul de les mesures angulars de l'analema obtingut amb Stellarium
+
+azimuts_ = []
+altures_ = []
+
+
+# Llegir l'arxiu exportat de Stellarium
+with open('analema_9h.csv', newline='', encoding='utf-8') as f:
+    lector = csv.DictReader(f, delimiter=';')
+    print(lector.fieldnames)
+    for fila in lector:
+        azimut_deg = float(fila['Azimuts'])
+        altura_deg = float(fila['Altures'])
+        azimuts_.append(azimut_deg)
+        altures_.append(altura_deg)
+        
+
+#Imprimir valors per comparar mides
+
+print('ANALEMA 9H')
+
+print('Mida altitudinal analema: ', altura_max - altura_min, 'graus')
+print('Mida altitudinal analema Stellarium: ', max(altures_) - min(altures_), 'graus')
+
+print('Mida azimutal analema: ', azimut_max - azimut_min, 'graus')
+print('Mida azimutal analema Stellarium: ', max(azimuts_) - min(azimuts_), 'graus')
+
+
 #Analema Solar a les 15:00
 
-altituts_2 = []
+altures_2 = []
 azimuts_2 = []
 
 for d in dies:
@@ -101,7 +185,7 @@ for d in dies:
 
     # Altura solar
     h = np.arcsin(np.sin(lat) * np.sin(delta) + np.cos(lat) * np.cos(delta) * np.cos(H))
-    altituts_2.append(np.degrees(h))
+    altures_2.append(np.degrees(h))
 
     # Azimut solar
     if H > 0:
@@ -114,7 +198,7 @@ for d in dies:
     
 plt.style.use('classic')
 plt.figure(facecolor='white', figsize=(6,8))
-plt.scatter(azimuts_2, altituts_2, s=100, edgecolors='none')
+plt.scatter(azimuts_2, altures_2, s=50, edgecolors='none')
 plt.title('Analema solar vist desde Bellaterra a les 15:00')
 plt.xlabel('Azimut (°)')
 plt.ylabel('Altura (°)')
@@ -122,3 +206,43 @@ plt.grid(True)
 plt.gca().invert_xaxis()
 plt.tight_layout()
 plt.show()
+
+
+#Càlcul de les mesures angulars de l'analema obtingut
+
+altura_max = max(altures_2)
+altura_min = min(altures_2)
+
+
+azimut_max = max(azimuts_2)
+azimut_min = min(azimuts_2)
+
+
+
+
+#Càlcul de les mesures angulars de l'analema obtingut amb Stellarium
+
+azimuts_ = []
+altures_ = []
+
+
+# Llegir l'arxiu exportat de Stellarium
+with open('analema_9h.csv', newline='', encoding='utf-8') as f:
+    lector = csv.DictReader(f, delimiter=';')
+    print(lector.fieldnames)
+    for fila in lector:
+        azimut_deg = float(fila['Azimuts'])
+        altura_deg = float(fila['Altures'])
+        azimuts_.append(azimut_deg)
+        altures_.append(altura_deg)
+        
+
+#Imprimir valors per comparar mides
+
+print('ANALEMA 15H')
+
+print('Mida altitudinal analema: ', altura_max - altura_min, 'graus')
+print('Mida altitudinal analema Stellarium: ', max(altures_) - min(altures_), 'graus')
+
+print('Mida azimutal analema: ', azimut_max - azimut_min, 'graus')
+print('Mida azimutal analema Stellarium: ', max(azimuts_) - min(azimuts_), 'graus')
