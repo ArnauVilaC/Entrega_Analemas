@@ -152,7 +152,6 @@ altures_ = []
 # Llegir l'arxiu exportat de Stellarium
 with open('dades_stellarium/analema_9h.csv', newline='', encoding='utf-8') as f:
     lector = csv.DictReader(f, delimiter=';')
-    print(lector.fieldnames)
     for fila in lector:
         azimut_deg = float(fila['Azimuts'])
         altura_deg = float(fila['Altures'])
@@ -226,7 +225,6 @@ altures_ = []
 # Llegir l'arxiu exportat de Stellarium
 with open('dades_stellarium/analema_15h.csv', newline='', encoding='utf-8') as f:
     lector = csv.DictReader(f, delimiter=';')
-    print(lector.fieldnames)
     for fila in lector:
         azimut_deg = float(fila['Azimuts'])
         altura_deg = float(fila['Altures'])
